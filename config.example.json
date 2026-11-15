@@ -1,0 +1,197 @@
+{
+  "screen": {
+    "width": 1920,
+    "height": 1080
+  },
+  "timing": {
+    "click_delay": 0.8,
+    "animation_delay": 3,
+    "summon_slot_delay": 0.15,
+    "targeting_delay": 0.3,
+    "target_cycle_delay": 0.15,
+    "phase_change_retries": 5,
+    "recovery_attempts": 5,
+    "duel_end_no_phase_timeout": 30,
+    "transition_timeout": 8,
+    "poll_interval": 0.35,
+    "calibration_switch_delay": 3
+  },
+  "recognition": {
+    "threshold": 0.13,
+    "regions": {
+      "world": [
+        1575,
+        0,
+        345,
+        300
+      ],
+      "duel_setup": [
+        1260,
+        592,
+        630,
+        472
+      ],
+      "duel_lobby": [
+        450,
+        135,
+        1050,
+        825
+      ],
+      "my_main": [
+        525,
+        120,
+        870,
+        240
+      ],
+      "my_battle": [
+        525,
+        120,
+        870,
+        240
+      ],
+      "attack_target": [
+        675,
+        15,
+        570,
+        112
+      ],
+      "my_draw": [
+        0,
+        75,
+        1350,
+        375
+      ],
+      "enemy_turn": [
+        525,
+        120,
+        870,
+        240
+      ]
+    },
+    "phase_yellow_threshold": 0.18,
+    "opponent_red_threshold": 0.18
+  },
+  "points": {
+    "add_npc": [
+      922,
+      794
+    ],
+    "bonz": [
+      1732,
+      409
+    ],
+    "ready": [
+      1238,
+      874
+    ],
+    "start": [
+      1618,
+      957
+    ],
+    "deck": [
+      963,
+      561
+    ],
+    "hand_first": [
+      285,
+      957
+    ],
+    "summon": [
+      165,
+      808
+    ],
+    "summon_slot": [
+      971,
+      696
+    ],
+    "phase_battle": [
+      1067,
+      330
+    ],
+    "phase_end": [
+      1434,
+      343
+    ],
+    "attack_button": [
+      960,
+      705
+    ],
+    "direct_attack": [
+      961,
+      189
+    ],
+    "phase_main": [
+      575,
+      250
+    ]
+  },
+  "zones": {
+    "own_monsters": [
+      [
+        604,
+        696
+      ],
+      [
+        790,
+        700
+      ],
+      [
+        960,
+        728
+      ],
+      [
+        1138,
+        686
+      ],
+      [
+        1320,
+        689
+      ]
+    ],
+    "opponent_monsters": [
+      [
+        707,
+        303
+      ],
+      [
+        842,
+        297
+      ],
+      [
+        952,
+        305
+      ],
+      [
+        1088,
+        302
+      ],
+      [
+        1214,
+        302
+      ]
+    ],
+    "memory_opponent_targets": [
+      [717, 300],
+      [840, 300],
+      [955, 300],
+      [1084, 300],
+      [1210, 300]
+    ],
+    "memory_opponent_confirms": [
+      [693, 378],
+      [825, 380],
+      [955, 380],
+      [1099, 380],
+      [1229, 380]
+    ]
+  },
+  "attack_sword_offset": [
+    0,
+    -120
+  ],
+  "memory_camera_scroll_up": 12,
+  "target_confirm_offset": [
+    0,
+    105
+  ]
+}

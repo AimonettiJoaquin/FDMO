@@ -1,0 +1,35 @@
+# Local game setup and generated data
+/config.json
+/debug/
+/logs/
+/dmo_memory_layout.json
+*.jsonl
+*.error.json
+
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
+
+# Personal environment and editor state
+.env
+.env.*
+!.env.example
+.aws/
+.codex/
+.agents/
+.idea/
+.vscode/
+.DS_Store
+
+# Local exports and backups
+*.zip
+*.tar.gz
+*.bak
