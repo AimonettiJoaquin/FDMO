@@ -1,8 +1,8 @@
 from unittest import TestCase
 from unittest.mock import Mock
 
-from dmo_loop_bot import DuelLoop
-from dmo_special_summon import SpecialSummonController
+from dmo.bot.dmo_loop_bot import DuelLoop
+from dmo.bot.dmo_special_summon import SpecialSummonController
 from tests.test_dmo_battle import sample, monster, add_monster
 from tests.test_dmo_loop_bot import config
 

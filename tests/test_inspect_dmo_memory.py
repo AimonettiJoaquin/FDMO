@@ -2,7 +2,7 @@ import struct
 import unittest
 from unittest.mock import Mock, patch
 
-from inspect_dmo_memory import Memory, validate_candidate, metadata_types
+from dmo.memory.inspect_dmo_memory import Memory, validate_candidate, metadata_types
 
 
 class MetadataNameTests(unittest.TestCase):
@@ -20,12 +20,12 @@ class MetadataNameTests(unittest.TestCase):
         return bytes(data)
 
     def test_ambiguous_short_name_rejected(self):
-        with patch('inspect_dmo_memory.METADATA', Mock(read_bytes=Mock(return_value=self.metadata()))):
+        with patch('dmo.memory.inspect_dmo_memory.METADATA', Mock(read_bytes=Mock(return_value=self.metadata()))):
             with self.assertRaisesRegex(ValueError, 'Ambiguous'):
                 metadata_types(('Misc',))
 
     def test_qualified_names_resolve_exact_namespace(self):
-        with patch('inspect_dmo_memory.METADATA', Mock(read_bytes=Mock(return_value=self.metadata()))):
+        with patch('dmo.memory.inspect_dmo_memory.METADATA', Mock(read_bytes=Mock(return_value=self.metadata()))):
             result = metadata_types(('global::Misc', 'UI::Misc', 'globalWidgets::Misc'))
         self.assertEqual([x['index'] for x in result.values()], [0, 1, 2])
 
@@ -42,7 +42,7 @@ class MemoryScanTests(unittest.TestCase):
         mem = self.memory()
         mem.read = Mock(return_value=struct.pack('<Q', 0x3188de40) + bytes(4088))
         entries = struct.pack('<3Q', 0, 0, 1 << 63)
-        with patch('inspect_dmo_memory.os.pread', return_value=entries):
+        with patch('dmo.memory.inspect_dmo_memory.os.pread', return_value=entries):
             hits = list(mem.find_pointers({'manager': 0x3188de40}, 4096))
         self.assertEqual(hits, [('manager', 0x12000)])
         mem.read.assert_called_once_with(0x12000, 4096)
@@ -52,12 +52,12 @@ class MemoryScanTests(unittest.TestCase):
     def test_swapped_pages_are_included(self):
         mem = self.memory()
         entries = struct.pack('<3Q', 1 << 62, 1 << 63, 0)
-        with patch('inspect_dmo_memory.os.pread', return_value=entries):
+        with patch('dmo.memory.inspect_dmo_memory.os.pread', return_value=entries):
             self.assertEqual(list(mem.allocated_ranges(0x10000, 12288)), [(0x10000, 8192)])
 
     def test_pagemap_failure_falls_back_to_reading_range(self):
         mem = self.memory()
-        with patch('inspect_dmo_memory.os.pread', side_effect=PermissionError):
+        with patch('dmo.memory.inspect_dmo_memory.os.pread', side_effect=PermissionError):
             self.assertEqual(list(mem.allocated_ranges(0x10000, 12288)), [(0x10000, 12288)])
 
     def test_budget_exhaustion_is_reported(self):

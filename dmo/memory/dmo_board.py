@@ -1,7 +1,7 @@
 """Bounded, read-only traversal of the client fields linked to one duel."""
 import struct
 
-from inspect_dmo_memory import class_name, list_size, validate_generic_class
+from dmo.memory.inspect_dmo_memory import class_name, list_size, validate_generic_class
 
 BOARD_TARGETS = ('DuelFieldScript', 'GameCard', 'VisualHelper', 'SyncList`1', 'CardFinder')
 LOCATIONS = ('Any', 'Hand', 'Field', 'Deck', 'Graveyard', 'Banished', 'ExtraDeck', 'Overlayed')

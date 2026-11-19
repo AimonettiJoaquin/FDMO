@@ -13,8 +13,8 @@ from pathlib import Path
 import subprocess
 import sys
 
-from dmo_battle import battle_decision
-from dmo_memory_bot import Desktop, ROOT, require_recent
+from dmo.strategy.dmo_battle import battle_decision
+from dmo.bot.dmo_memory_bot import Desktop, ROOT, require_recent
 
 
 def ready(state, phase):

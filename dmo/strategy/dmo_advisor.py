@@ -115,7 +115,7 @@ def suggestions(state, *, spells=False):
     options = []
     if state['phase'] in ('MAIN 1', 'MAIN 2'):
         if spells:
-            from dmo_spells import spell_plan
+            from dmo.strategy.dmo_spells import spell_plan
             plan = spell_plan(state)
             if plan is not None:
                 options.append(plan)
@@ -132,7 +132,7 @@ def suggestions(state, *, spells=False):
                 return dict(status='no_suggestion', executable=False, options=[],
                             reason='El cliente no publica Summon para los candidatos de nivel 1–4; no sugiero otra invocación.')
         if candidates:
-            from dmo_farm_strategy import FarmCombat
+            from dmo.strategy.dmo_farm_strategy import FarmCombat
             combat = FarmCombat(state)
             trade = combat.trade()
             assailant = trade['attacker'] if trade and trade['attacker'] in candidates else None

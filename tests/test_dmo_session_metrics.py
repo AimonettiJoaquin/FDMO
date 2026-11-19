@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from dmo_session_metrics import SessionMetrics
+from dmo.metrics.dmo_session_metrics import SessionMetrics
 
 
 def currency_state(money):

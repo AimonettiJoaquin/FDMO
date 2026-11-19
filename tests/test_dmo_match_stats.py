@@ -1,7 +1,7 @@
 import copy
 from unittest import TestCase
 
-from dmo_match_stats import MatchStats
+from dmo.metrics.dmo_match_stats import MatchStats
 from tests.test_dmo_battle import sample
 
 

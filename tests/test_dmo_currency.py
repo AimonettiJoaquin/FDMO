@@ -1,7 +1,7 @@
 from unittest import TestCase
 from unittest.mock import Mock
 
-from dmo_currency import read_wallet
+from dmo.memory.dmo_currency import read_wallet
 
 
 class WalletTests(TestCase):

@@ -1,7 +1,7 @@
 """Conservative battle decisions from client-published actions and board state."""
 
-from dmo_advisor import published_attackers, visible, zone_cards
-from dmo_farm_strategy import FarmCombat, damage_route
+from dmo.strategy.dmo_advisor import published_attackers, visible, zone_cards
+from dmo.strategy.dmo_farm_strategy import FarmCombat, damage_route
 
 
 def battle_decision(state, excluded=(), *, excluded_targets=()):

@@ -1,7 +1,7 @@
 """Bounded discovery of interactive objects linked to our hand; no clicks."""
 import time
-from dmo_board import list_refs
-from inspect_dmo_memory import class_name
+from dmo.memory.dmo_board import list_refs
+from dmo.memory.inspect_dmo_memory import class_name
 
 SCENE_TARGETS = ('SelectableDuelElement', 'CardHover', 'ButtonHover', 'global::Misc')
 

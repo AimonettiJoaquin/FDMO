@@ -1,7 +1,7 @@
 from copy import deepcopy
 import unittest
 
-from dmo_card_memory import OwnCardMemory, render_card_memory
+from dmo.memory.dmo_card_memory import OwnCardMemory, render_card_memory
 
 
 def state():

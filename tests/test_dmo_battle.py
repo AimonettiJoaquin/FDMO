@@ -3,8 +3,8 @@ from datetime import datetime, timezone
 from unittest import TestCase
 from unittest.mock import Mock
 
-from dmo_battle import battle_decision
-from dmo_turn_bot import TurnController
+from dmo.strategy.dmo_battle import battle_decision
+from dmo.bot.dmo_turn_bot import TurnController
 
 
 def sample():

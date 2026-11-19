@@ -1,7 +1,7 @@
 """Deck-specific spell priorities from complete board and published hand actions."""
 
-from dmo_advisor import published_hand_actions, visible, zone_cards
-from dmo_farm_strategy import FarmCombat, ASSAILANT
+from dmo.strategy.dmo_advisor import published_hand_actions, visible, zone_cards
+from dmo.strategy.dmo_farm_strategy import FarmCombat, ASSAILANT
 
 SEARCH_SPELLS = ('Reinforcement of the Army', 'Fire Formation - Tenki', 'Terraforming')
 

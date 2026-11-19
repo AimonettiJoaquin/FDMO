@@ -1,7 +1,7 @@
 from unittest import TestCase
 from unittest.mock import Mock, patch
 
-from dmo_loop_bot import DuelLoop
+from dmo.bot.dmo_loop_bot import DuelLoop
 from tests.test_dmo_battle import sample
 from tests.test_dmo_memory_bot import state as hand_state
 
@@ -20,7 +20,7 @@ def config():
 
 class DuelLoopTests(TestCase):
     def late_summon(self, stage='recovery'):
-        from dmo_memory_bot import hand_signature
+        from dmo.bot.dmo_memory_bot import hand_signature
         from tests.test_dmo_memory_bot import MonsterPlacementTests
         state = MonsterPlacementTests().sample()
         state['actions']['prompt_details'] = dict(CurrentChoiceHelper=dict(
@@ -70,7 +70,7 @@ class DuelLoopTests(TestCase):
         loop.stage = 'turn'
         loop.observe_state = Mock(side_effect=RuntimeError(
             'No se localizó el objetivo enemigo por hover verificado'))
-        with patch('dmo_loop_bot.EndFallback'):
+        with patch('dmo.bot.dmo_loop_bot.EndFallback'):
             self.assertIn('último recurso END', loop.observe(state))
         self.assertEqual(loop.stage, 'end_fallback')
 
@@ -165,7 +165,7 @@ class DuelLoopTests(TestCase):
         loop.last_draw = (state['manager'], state['board']['fields'][0]['address'],
                           4, 31, ('0xold',))
         # Recovery only trusts a real phase controller that clicked END.
-        from dmo_turn_bot import TurnController
+        from dmo.bot.dmo_turn_bot import TurnController
         loop.actor = TurnController(loop.desktop, loop.config)
         loop.actor.stage, loop.actor.end_origin_phase = 'await_end', 'BATTLE'
         self.assertEqual(loop.observe(state), 'recovery_reading_phase')
@@ -176,7 +176,7 @@ class DuelLoopTests(TestCase):
         loop.desktop.key.assert_not_called()
 
     def test_end_to_new_draw_starts_fresh_draw_without_recovery(self):
-        from dmo_turn_bot import TurnController
+        from dmo.bot.dmo_turn_bot import TurnController
         state = self.draw_state(open_state=False)
         loop = DuelLoop(self.desktop(), config())
         loop.manager, loop.stage = state['manager'], 'turn'
@@ -253,7 +253,7 @@ class DuelLoopTests(TestCase):
         state = sample()
         state['phase'] = 'MAIN 1'
         state['actions']['prompts']['CurrentChoiceHelper'] = '0xaaaa'
-        with patch('dmo_loop_bot.MonsterPlacement') as placement:
+        with patch('dmo.bot.dmo_loop_bot.MonsterPlacement') as placement:
             self.assertEqual(loop.observe(state), 'summon_zone_ready')
         placement.assert_called_once_with(loop.desktop, loop.config, 'Duplicate',
                                            card_address='0x2000')
@@ -372,7 +372,7 @@ class DuelLoopTests(TestCase):
         state['phase'] = 'MAIN 1'
         state['advice'] = dict(status='no_suggestion', options=[])
         self.assertEqual(loop.observe(state), 'main_ready')
-        with patch('dmo_loop_bot.selection', return_value=None):
+        with patch('dmo.bot.dmo_loop_bot.selection', return_value=None):
             self.assertEqual(loop.observe(state), 'turn_actions_started')
         loop.actor = Mock(finished=True)
         loop.actor.observe.return_value = 'turn_passed'

@@ -1,7 +1,7 @@
 from copy import deepcopy
 import unittest
 
-from dmo_advisor import Advisor, suggestions, render_advice
+from dmo.strategy.dmo_advisor import Advisor, suggestions, render_advice
 from tests.test_dmo_card_memory import state
 
 

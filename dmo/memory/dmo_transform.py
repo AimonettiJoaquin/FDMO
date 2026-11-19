@@ -8,7 +8,7 @@ import hashlib
 import math
 import struct
 
-from inspect_dmo_memory import GAME
+from dmo.memory.inspect_dmo_memory import GAME
 
 UNITY_PLAYER = GAME / 'UnityPlayer.dll'
 UNITY_SHA256 = 'ee9a2892f56e51ed4ed4a86d0d7223bf13c98c352e1339fa3c9ff4bd88a8515a'

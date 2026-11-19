@@ -3,7 +3,7 @@ from datetime import datetime, timezone
 from unittest import TestCase
 from unittest.mock import Mock
 
-from dmo_memory_bot import (Desktop, MonsterPlacement, Selector, SummonOption,
+from dmo.bot.dmo_memory_bot import (Desktop, MonsterPlacement, Selector, SummonOption,
                             monster_zone_choice, probe_points, selection)
 
 
@@ -219,7 +219,7 @@ class SelectorTests(TestCase):
 class DesktopTests(TestCase):
     def test_warp_then_relative_motion_and_readback(self):
         desktop = Desktop()
-        with __import__('unittest').mock.patch('dmo_memory_bot.subprocess.run') as run:
+        with __import__('unittest').mock.patch('dmo.bot.dmo_memory_bot.subprocess.run') as run:
             run.side_effect = [Mock(), Mock(), Mock(stdout='{"x": 102, "y": 900}')]
             self.assertEqual(desktop.move((100, 900)), (102, 900))
         self.assertEqual(run.call_args_list[0].args[0][:2], ['hyprctl', 'dispatch'])
@@ -229,7 +229,7 @@ class DesktopTests(TestCase):
 
     def test_bad_position_refuses_probe(self):
         desktop = Desktop()
-        with __import__('unittest').mock.patch('dmo_memory_bot.subprocess.run') as run:
+        with __import__('unittest').mock.patch('dmo.bot.dmo_memory_bot.subprocess.run') as run:
             run.side_effect = [Mock(), Mock(), Mock(stdout='{"x": 250, "y": 900}')] * 3
             with self.assertRaisesRegex(RuntimeError, 'lejos'):
                 desktop.move((100, 900))
@@ -237,7 +237,7 @@ class DesktopTests(TestCase):
 
     def test_transient_cursor_error_retries_before_click(self):
         desktop = Desktop()
-        with __import__('unittest').mock.patch('dmo_memory_bot.subprocess.run') as run:
+        with __import__('unittest').mock.patch('dmo.bot.dmo_memory_bot.subprocess.run') as run:
             run.side_effect = [Mock(), Mock(), Mock(stdout='{"x": 934, "y": 569}'),
                                Mock(), Mock(), Mock(stdout='{"x": 963, "y": 561}')]
             self.assertEqual(desktop.move((963, 561)), (963, 561))
@@ -245,7 +245,7 @@ class DesktopTests(TestCase):
 
     def test_scroll_up_uses_relative_wheel_event(self):
         desktop = Desktop()
-        with __import__('unittest').mock.patch('dmo_memory_bot.subprocess.run') as run:
+        with __import__('unittest').mock.patch('dmo.bot.dmo_memory_bot.subprocess.run') as run:
             desktop.scroll_up(12)
         self.assertEqual(run.call_args.args[0],
                          ['ydotool', 'mousemove', '--wheel', '-x', '0', '-y', '12'])

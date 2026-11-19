@@ -13,10 +13,10 @@ from pathlib import Path
 import subprocess
 import sys
 
-from dmo_advisor import published_summons, published_hand_actions
+from dmo.strategy.dmo_advisor import published_summons, published_hand_actions
 
 
-ROOT = Path(__file__).resolve().parent
+from dmo.paths import ROOT
 
 
 def hand_signature(state):

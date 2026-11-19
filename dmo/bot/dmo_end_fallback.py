@@ -1,5 +1,5 @@
 """Read the current phase, retry DRAW, then END and finally forfeit."""
-from dmo_memory_bot import hand_signature, require_recent
+from dmo.bot.dmo_memory_bot import hand_signature, require_recent
 
 
 class EndFallback:

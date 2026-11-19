@@ -1,8 +1,8 @@
 from unittest import TestCase
 from unittest.mock import Mock, patch
 
-from dmo_end_fallback import EndFallback
-from dmo_loop_bot import DuelLoop
+from dmo.bot.dmo_end_fallback import EndFallback
+from dmo.bot.dmo_loop_bot import DuelLoop
 from tests.test_dmo_special_summon import desktop
 from tests.test_dmo_battle import sample
 from tests.test_dmo_loop_bot import config
@@ -115,8 +115,8 @@ class EndFallbackTests(TestCase):
         self.assertEqual(loop.stage, 'end_fallback')
 
     def test_backspace_key_uses_evdev_backspace_without_changing_legacy_bot(self):
-        from dmo_memory_bot import Desktop
-        with patch('dmo_memory_bot.subprocess.run') as run:
+        from dmo.bot.dmo_memory_bot import Desktop
+        with patch('dmo.bot.dmo_memory_bot.subprocess.run') as run:
             Desktop().key('backspace')
         run.assert_called_once_with(['ydotool', 'key', '14:1', '14:0'], check=True)
 

@@ -1,8 +1,8 @@
 """Read client-published action candidates, without invoking game methods."""
 import struct
 
-from dmo_board import list_refs
-from inspect_dmo_memory import METADATA, metadata_types, class_name, list_size
+from dmo.memory.dmo_board import list_refs
+from dmo.memory.inspect_dmo_memory import METADATA, metadata_types, class_name, list_size
 
 ACTION_TARGETS = ('UsableHelper',)
 SPELL_PROMPT_TARGETS = ('ChoiceHelper', 'ConfirmationHelper', 'OptionHelper', 'CardOptionHelper')

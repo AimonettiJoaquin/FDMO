@@ -15,7 +15,7 @@ import struct
 import sys
 
 
-from dmo_settings import game_directory
+from dmo.settings import game_directory
 
 GAME = game_directory()
 METADATA = GAME / 'DMO_Data/il2cpp_data/Metadata/global-metadata.dat'

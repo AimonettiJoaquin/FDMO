@@ -2,8 +2,8 @@ from copy import deepcopy
 from unittest import TestCase
 from unittest.mock import Mock
 
-from dmo_spell_controller import SpellController
-from dmo_spells import spell_plan
+from dmo.bot.dmo_spell_controller import SpellController
+from dmo.strategy.dmo_spells import spell_plan
 from tests.test_dmo_spells import spell_state
 from tests.test_dmo_loop_bot import config
 from tests.test_dmo_battle import add_monster, monster

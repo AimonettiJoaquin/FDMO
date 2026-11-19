@@ -6,7 +6,7 @@ import time
 
 from PIL import Image
 
-from dmo_memory_bot import Desktop, ROOT
+from dmo.bot.dmo_memory_bot import Desktop, ROOT
 
 
 def hypr_json(command):

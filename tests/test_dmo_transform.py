@@ -3,7 +3,7 @@ import struct
 import unittest
 from unittest.mock import Mock, patch
 
-from dmo_transform import TransformReader, UNITY_PLAYER, apply_trs, verify_engine, engine_sections
+from dmo.memory.dmo_transform import TransformReader, UNITY_PLAYER, apply_trs, verify_engine, engine_sections
 from tests.test_monitor_dmo import FakeMemory
 
 
@@ -26,8 +26,8 @@ class TransformTests(unittest.TestCase):
         self.mem.put(0x7000, '<2i', -1, 0)
         self.mem.put(0x6000, '<12f', 10, 20, 0, 0, 0, 0, 0, 1, 2, 2, 2, 0)
         self.mem.put(0x6030, '<12f', 3, 4, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0)
-        with (patch('dmo_transform.verify_engine'),
-              patch('dmo_transform.engine_sections', return_value=[
+        with (patch('dmo.memory.dmo_transform.verify_engine'),
+              patch('dmo.memory.dmo_transform.engine_sections', return_value=[
                   (0x18000, 0x18100, False), (0x19000, 0x19100, True)])):
             self.reader = TransformReader(self.mem)
 

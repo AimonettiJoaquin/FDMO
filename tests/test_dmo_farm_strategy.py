@@ -1,10 +1,10 @@
 from copy import deepcopy
 from unittest import TestCase
 
-from dmo_advisor import suggestions
-from dmo_battle import battle_decision
-from dmo_farm_strategy import FarmCombat, damage_route
-from dmo_spells import spell_plan
+from dmo.strategy.dmo_advisor import suggestions
+from dmo.strategy.dmo_battle import battle_decision
+from dmo.strategy.dmo_farm_strategy import FarmCombat, damage_route
+from dmo.strategy.dmo_spells import spell_plan
 from tests.test_dmo_battle import sample, monster, add_monster, publish_attack
 from tests.test_dmo_spells import spell_state
 

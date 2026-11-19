@@ -12,13 +12,13 @@ from pathlib import Path
 import subprocess
 import sys
 
-from dmo_memory_bot import (Desktop, MonsterPlacement, ROOT, Selector, SummonOption,
+from dmo.bot.dmo_memory_bot import (Desktop, MonsterPlacement, ROOT, Selector, SummonOption,
                             hand_signature, monster_zone_choice, probe_points, require_recent, selection)
-from dmo_turn_bot import TurnController
-from dmo_spell_controller import SpellController
-from dmo_card_panel import CardPanelController
-from dmo_special_summon import SpecialSummonController
-from dmo_end_fallback import EndFallback
+from dmo.bot.dmo_turn_bot import TurnController
+from dmo.bot.dmo_spell_controller import SpellController
+from dmo.bot.dmo_card_panel import CardPanelController
+from dmo.bot.dmo_special_summon import SpecialSummonController
+from dmo.bot.dmo_end_fallback import EndFallback
 
 
 class DuelLoop:

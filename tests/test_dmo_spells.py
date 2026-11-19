@@ -1,8 +1,8 @@
 from copy import deepcopy
 from unittest import TestCase
 
-from dmo_advisor import suggestions
-from dmo_spells import spell_plan
+from dmo.strategy.dmo_advisor import suggestions
+from dmo.strategy.dmo_spells import spell_plan
 from tests.test_dmo_battle import sample, monster, add_monster
 
 

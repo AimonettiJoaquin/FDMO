@@ -192,17 +192,42 @@ con Python 3.12 y 3.14 usando las acciones oficiales
 
 Estructura principal:
 
-| Archivo o carpeta | Función |
-| --- | --- |
-| `dmo_run_bot.py` | Inicio de duelos, repetición y cierre de sesión. |
-| `monitor_dmo.py`, `inspect_dmo_memory.py` | Lectura y validación de memoria. |
-| `dmo_loop_bot.py`, `dmo_turn_bot.py` | Flujo del duelo y ejecución de turnos. |
-| `dmo_advisor.py`, `dmo_farm_strategy.py`, `dmo_battle.py` | Decisiones. |
-| `dmo_spell_controller.py`, `dmo_card_panel.py` | Mágicas y selecciones. |
-| `dmo_scene.py`, `dmo_transform.py` | Objetos de interfaz y vínculos nativos. |
-| `dmo_settings.py` | Ruta configurable de instalación. |
-| `dmo_bot.py`, `templates/` | Reconocimiento visual y calibración. |
-| `tests/` | Pruebas y fixtures de memoria simulada. |
+```text
+DMO/
+├── dmo/                  # Código Python organizado por responsabilidad
+│   ├── bot/              # Lanzador, flujo, turnos, selecciones y calibración
+│   ├── memory/           # Monitor, lectores de memoria y objetos nativos
+│   ├── strategy/         # Asesor, combate y decisiones sobre mágicas
+│   ├── desktop/          # Ventana, foco y adaptación de coordenadas
+│   ├── metrics/          # Resultados de partidas y métricas de sesión
+│   ├── settings.py       # Instalación del juego y variables de entorno
+│   └── paths.py          # Ruta base compartida del proyecto
+├── tests/                # Pruebas y fixtures de memoria simulada
+├── templates/            # Plantillas de reconocimiento visual
+├── docs/                 # Guías e informes
+├── debug/                # Capturas y caché generadas (fuera de Git)
+├── logs/                 # Resúmenes generados (fuera de Git)
+├── dmo_run_bot.py         # Acceso al lanzador
+├── dmo_bot.py             # Acceso a calibración y modo visual
+└── monitor_dmo.py         # Acceso al monitor de memoria
+```
+
+Los tres accesos de la raíz conservan los comandos documentados. La
+configuración local y las plantillas siguen resolviéndose desde la raíz del
+proyecto, independientemente del directorio de trabajo.
+
+Las otras herramientas se ejecutan como módulos desde la raíz. Por ejemplo:
+
+```bash
+python -m dmo.memory.inspect_dmo_memory --help
+python -m dmo.strategy.dmo_advisor --help
+python -m dmo.bot.dmo_loop_bot --help
+```
+
+Para importar código, usá la ruta del paquete, por ejemplo
+`from dmo.strategy.dmo_battle import battle_decision`. Las referencias a nombres
+de archivos en informes anteriores corresponden ahora a los módulos de estas
+carpetas.
 
 ## Subir a GitHub
 

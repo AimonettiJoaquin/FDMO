@@ -4,7 +4,7 @@ from unittest.mock import Mock, patch
 
 import numpy as np
 
-from dmo_bot import Bot, DEFAULT_CONFIG, SafetyStop, Vision
+from dmo.bot.dmo_bot import Bot, DEFAULT_CONFIG, SafetyStop, Vision
 
 
 class PhaseUI:
@@ -49,7 +49,7 @@ class PhaseRecoveryTests(unittest.TestCase):
         self.bot.vision = Mock()
         self.bot.vision.is_state.side_effect = lambda state, image: state == image
         self.bot.settle = Mock()
-        self.sleep = patch("dmo_bot.time.sleep")
+        self.sleep = patch("dmo.bot.dmo_bot.time.sleep")
         self.sleep.start()
         self.addCleanup(self.sleep.stop)
 
@@ -95,7 +95,7 @@ class PhaseRecoveryTests(unittest.TestCase):
         self.bot.config["timing"]["duel_end_no_phase_timeout"] = 0
         self.assertIsNone(self.bot.wait_for_own_phase())
 
-    @patch("dmo_bot.switch_to_game_delay")
+    @patch("dmo.bot.dmo_bot.switch_to_game_delay")
     def test_run_requests_end_after_rejected_battle(self, switch_delay):
         # Reproduce the log: an initial Bonz detection, then our Draw/Main.
         self.bot.desktop = Mock()

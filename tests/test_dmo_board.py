@@ -2,8 +2,8 @@ import struct
 import unittest
 from unittest.mock import Mock, patch
 
-from dmo_board import BoardReader, array_refs, list_refs, render_board, render_visual_candidates
-from inspect_dmo_memory import validate_class, validate_generic_class
+from dmo.memory.dmo_board import BoardReader, array_refs, list_refs, render_board, render_visual_candidates
+from dmo.memory.inspect_dmo_memory import validate_class, validate_generic_class
 from tests.test_monitor_dmo import FakeMemory
 
 
@@ -325,7 +325,7 @@ class BoardTests(unittest.TestCase):
         self.monitor.layout = {'classes': {'SyncList`1': {'fields': {
             'objects': dict(offset=0, type_code=21, attributes=33)}}}}
         schema = {'fields': {'objects': dict(offset=48, type_code=21, attributes=33)}}
-        with patch('dmo_board.validate_generic_class', return_value=schema):
+        with patch('dmo.memory.dmo_board.validate_generic_class', return_value=schema):
             self.assertEqual(self.reader.sync_refs(sync), [10, 20])
             schema['fields']['objects']['offset'] = 0
             with self.assertRaisesRegex(ValueError, 'Layout'):
@@ -334,7 +334,7 @@ class BoardTests(unittest.TestCase):
     def test_sync_list_rejects_unvalidated_class(self):
         sync = self.named_object('SyncList`1')
         self.monitor.definitions = {'SyncList`1': {}, 'VisualHelper': {}}
-        with patch('dmo_board.validate_generic_class', side_effect=ValueError('Clase no validada')):
+        with patch('dmo.memory.dmo_board.validate_generic_class', side_effect=ValueError('Clase no validada')):
             with self.assertRaisesRegex(ValueError, 'no validada'):
                 self.reader.sync_refs(sync)
 

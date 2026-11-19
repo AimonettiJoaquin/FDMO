@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import patch
 
 from tests import test_dmo_board as fixtures
-from dmo_actions import ActionReader, option_values, render_actions, selected_options
+from dmo.memory.dmo_actions import ActionReader, option_values, render_actions, selected_options
 
 
 class ActionTests(unittest.TestCase):

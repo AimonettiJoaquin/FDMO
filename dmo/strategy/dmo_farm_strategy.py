@@ -1,7 +1,7 @@
 """Numeric farm-deck tactics shared by summon, spell and battle decisions."""
 from functools import lru_cache
 
-from dmo_advisor import published_hand_actions, published_summons, summon_attack, visible, zone_cards
+from dmo.strategy.dmo_advisor import published_hand_actions, published_summons, summon_attack, visible, zone_cards
 
 ASSAILANT = 'D.D. Assailant'
 # Verified from global::Attributes defaults in the installed IL2CPP metadata.

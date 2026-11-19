@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import Mock, patch
 
 from tests import test_dmo_board as fixtures
-from dmo_scene import SceneReader, render_scene
+from dmo.memory.dmo_scene import SceneReader, render_scene
 
 
 class SceneTests(unittest.TestCase):
@@ -190,7 +190,7 @@ class SceneTests(unittest.TestCase):
 
     def test_collection_mutation_discards_that_source(self):
         self.f.values[self.f.monitor.player, 'TargetableElements'] = self.f.collection([])
-        with patch('dmo_scene.list_refs', side_effect=[[self.element], [], [], [], [self.card]]):
+        with patch('dmo.memory.dmo_scene.list_refs', side_effect=[[self.element], [], [], [], [self.card]]):
             result = self.reader.read(self.board)
         self.assertEqual(result['hand_elements'], [])
         self.assertTrue(result['errors'])

@@ -6,7 +6,7 @@ import tempfile
 import unittest
 from unittest.mock import Mock, patch
 
-import dmo_run_bot as runner
+import dmo.bot.dmo_run_bot as runner
 
 
 class MatchRunnerTests(unittest.TestCase):

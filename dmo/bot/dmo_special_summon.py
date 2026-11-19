@@ -1,7 +1,7 @@
 """Continue a confirmed revival/search panel without spending a normal summon."""
 import re
 
-from dmo_memory_bot import require_recent
+from dmo.bot.dmo_memory_bot import require_recent
 
 
 def plain(text):

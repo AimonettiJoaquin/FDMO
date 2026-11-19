@@ -1,8 +1,8 @@
 from unittest import TestCase
 from unittest.mock import Mock
 
-from dmo_card_panel import CardPanelController
-from dmo_loop_bot import DuelLoop
+from dmo.bot.dmo_card_panel import CardPanelController
+from dmo.bot.dmo_loop_bot import DuelLoop
 from tests import test_dmo_spell_controller as spell_fixtures
 from tests.test_dmo_loop_bot import config
 

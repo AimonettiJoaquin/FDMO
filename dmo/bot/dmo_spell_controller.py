@@ -2,10 +2,10 @@
 
 import json
 
-from dmo_advisor import zone_cards, visible
-from dmo_memory_bot import SummonOption, hand_signature, selection, require_recent
-from dmo_turn_bot import ready
-from dmo_card_panel import CardPanelController
+from dmo.strategy.dmo_advisor import zone_cards, visible
+from dmo.bot.dmo_memory_bot import SummonOption, hand_signature, selection, require_recent
+from dmo.bot.dmo_turn_bot import ready
+from dmo.bot.dmo_card_panel import CardPanelController
 
 
 class SpellController:

@@ -1,7 +1,7 @@
 """Handle the client's card selection panel independently of turns/effects."""
 import re
 
-from dmo_memory_bot import require_recent
+from dmo.bot.dmo_memory_bot import require_recent
 
 
 class CardPanelController:

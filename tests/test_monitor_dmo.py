@@ -4,8 +4,8 @@ import io
 import unittest
 from unittest.mock import Mock, patch
 
-from inspect_dmo_memory import METADATA
-from monitor_dmo import DuelMonitor, main, render, resolve_identity
+from dmo.memory.inspect_dmo_memory import METADATA
+from dmo.memory.monitor_dmo import DuelMonitor, main, render, resolve_identity
 
 
 class FakeMemory:
@@ -74,7 +74,7 @@ class MonitorTests(unittest.TestCase):
 
     def test_currency_unavailable_does_not_invalidate_duel_snapshot(self):
         self.monitor.read_currency = True
-        with patch('monitor_dmo.read_wallet', side_effect=ValueError('saldo cambió')):
+        with patch('dmo.memory.monitor_dmo.read_wallet', side_effect=ValueError('saldo cambió')):
             state = self.monitor.snapshot()
         self.assertEqual(state['status'], 'duel')
         self.assertEqual(state['currency']['status'], 'unavailable')
@@ -82,7 +82,7 @@ class MonitorTests(unittest.TestCase):
     def test_currency_is_included_only_after_stable_player_snapshot(self):
         self.monitor.read_currency = True
         wallet = dict(status='observed', money=1200, player=hex(self.player))
-        with patch('monitor_dmo.read_wallet', return_value=wallet) as read:
+        with patch('dmo.memory.monitor_dmo.read_wallet', return_value=wallet) as read:
             state = self.monitor.snapshot()
         self.assertEqual(state['currency']['money'], 1200)
         read.assert_called_once_with(self.monitor)
@@ -91,14 +91,14 @@ class MonitorTests(unittest.TestCase):
         self.monitor.read_currency = True
         self.mem.put(self.player + 0x88, '<B', 0)
         wallet = dict(status='observed', money=1400, player=hex(self.player))
-        with patch('monitor_dmo.read_wallet', return_value=wallet):
+        with patch('dmo.memory.monitor_dmo.read_wallet', return_value=wallet):
             state = self.monitor.snapshot()
         self.assertEqual(state['status'], 'outside_duel')
         self.assertEqual(state['currency']['money'], 1400)
 
     def test_currency_player_mismatch_does_not_change_duel_state(self):
         self.monitor.read_currency = True
-        with patch('monitor_dmo.read_wallet', return_value=dict(player='0xother')):
+        with patch('dmo.memory.monitor_dmo.read_wallet', return_value=dict(player='0xother')):
             state = self.monitor.snapshot()
         self.assertEqual(state['status'], 'duel')
         self.assertEqual(state['currency']['status'], 'unavailable')
@@ -219,13 +219,13 @@ class MonitorCommandTests(unittest.TestCase):
         monitor.discover.return_value = False
         monitor.diagnostic_report.return_value = {'found': False, 'candidates': []}
         with (patch('sys.argv', ['monitor_dmo.py', '--pid', '123', *arguments]),
-              patch('monitor_dmo.process_start', return_value='generation'),
-              patch('monitor_dmo.native_layout', return_value={}),
-              patch('monitor_dmo.metadata_types', return_value={}),
-              patch('monitor_dmo.Memory'),
-              patch('monitor_dmo.DuelMonitor', return_value=monitor),
-              patch('monitor_dmo.Path.read_text', return_value='{}'),
-              patch('monitor_dmo.time.sleep') as sleep,
+              patch('dmo.memory.monitor_dmo.process_start', return_value='generation'),
+              patch('dmo.memory.monitor_dmo.native_layout', return_value={}),
+              patch('dmo.memory.monitor_dmo.metadata_types', return_value={}),
+              patch('dmo.memory.monitor_dmo.Memory'),
+              patch('dmo.memory.monitor_dmo.DuelMonitor', return_value=monitor),
+              patch('dmo.memory.monitor_dmo.Path.read_text', return_value='{}'),
+              patch('dmo.memory.monitor_dmo.time.sleep') as sleep,
               contextlib.redirect_stdout(io.StringIO()),
               contextlib.redirect_stderr(io.StringIO())):
             result = main()
@@ -239,7 +239,7 @@ class MonitorCommandTests(unittest.TestCase):
 
     def test_unidentified_optional_scene_cache_does_not_stop_discovery(self):
         monitor = Mock(player=None)
-        with patch('monitor_dmo.Path.stat', return_value=Mock(st_size=10)):
+        with patch('dmo.memory.monitor_dmo.Path.stat', return_value=Mock(st_size=10)):
             result, monitor = self.run_command(['--scene-cache', '/tmp/cache.json'], monitor)
         self.assertEqual(result, 3)  # Failed identity discovery, not a cache failure.
         monitor.discover.assert_called_once()
